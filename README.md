@@ -16,7 +16,7 @@ Tested on **Ryzen 7 5800X**, Node.js v24.
 
 > Use `hash` for inputs < 256KB, `hashRayon` for larger inputs.
 
-## Usage
+## Installation
 
 ```bash
 git clone https://github.com/UneBaguette/blake3-napi
@@ -24,6 +24,8 @@ cd blake3-napi
 yarn
 yarn build
 ```
+
+## Usage
 
 ```js
 import { hash, hashRayon, keyedHash, deriveKey, Hasher } from './index.js'
