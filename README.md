@@ -61,6 +61,10 @@ yarn test
 yarn bench
 ```
 
+## Security
+
+The underlying `blake3` Rust crate targets algorithmic constant time. The hashing itself happens entirely in native Rust, V8 never touches the data. However, the JavaScript call boundary introduces some non-determinism that is outside our control. For absolute security, use the `blake3` Rust crate directly in a Rust program.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
