@@ -21,28 +21,29 @@ Tested on **Ryzen 7 5800X**, Node.js v24.
 ```bash
 git clone https://github.com/UneBaguette/blake3-napi
 cd blake3-napi
-npm install
-npm run build
+yarn
+yarn build
 ```
 
 ```js
 import { hash, hashRayon, keyedHash, deriveKey, Hasher } from './index.js'
 
-// One-shot
-hash(data)               // Uint8Array to Uint8Array (32 bytes)
-hashRayon(data)          // multi-threaded, faster for large inputs
+const data = new TextEncoder().encode('hello world')
+const key = new Uint8Array(32).fill(1)
 
-// Keyed hash (MAC)
-keyedHash(data, key32)   // key must be 32 bytes
+// One-shot hashing
+hash(data)
+hashRayon(data) // use this for inputs larger than 256KB
 
-// Key derivation
-deriveKey('my context', keyMaterial)
+// MAC and key derivation
+keyedHash(data, key)
+deriveKey('my context', key)
 
 // Streaming
 const h = new Hasher()
-h.update(chunk1)
-h.update(chunk2)
-h.finalize()             // 32 bytes
+h.update(data.slice(0, 5))
+h.update(data.slice(5))
+h.finalize()
 ```
 
 ## Building
@@ -60,4 +61,4 @@ yarn bench
 
 ## License
 
-MIT
+This project is licensed under the [MIT License](LICENSE).
